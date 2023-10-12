@@ -93,6 +93,7 @@ const superUser = {
 // 3.  ...superUser.company ,  catchPhrase: "new-code phrase"  и указываем  ключ:"значение"  которого хотим поменять.
 const superUserCopy = {...superUser, company: {...superUser.company, catchPhrase: "new-code phrase"}}
 console.log(superUserCopy)
+console.log(superUser)
 
 
 
