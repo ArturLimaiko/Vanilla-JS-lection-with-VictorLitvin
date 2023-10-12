@@ -202,3 +202,27 @@ const myIncludes = (array, el) => {
 console.log(myIncludes(students, students[3]))//вернет true
 
 console.log(myIncludes(students, 1)) //вернет false потому что мы создали другой объект и ссылки на него в объекте не будет
+
+
+
+
+//МЕТОД SLICE
+// возвращает новый массив который представляет из себя часть исходного массива
+// в параметрах указываем исходный массив array - startIndex  по которому мы будем вырезать
+// и до куда будем вырезать endIndex
+// 1. возвращаем  пустой  новый массив const result = []
+// 2. начинается цикл со i = startIndex  и до  i < endIndex
+// 3. пушим в результирующий массив result.push(array[i])
+// 4.
+// 5.
+// 6.
+
+const mySlice = (array, startIndex = 0, endIndex = array.length) => {
+    const result = []
+    for (let i = startIndex; i < endIndex; i++) {
+    result.push(array[i])
+    }
+    return result
+}
+
+console.log(mySlice([1,2,3,4,5], 1 , 3))
