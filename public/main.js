@@ -4,7 +4,7 @@ const students = [
         age: 20,
         isMarried: true,
         scores: 100
-            //isStudent: true
+        //isStudent: true
     },
     {
         name: "Tanya",
@@ -68,7 +68,7 @@ const students = [
 //УНИВЕРСАЛЬНАЯ ФУНКЦИЯ КОТОРОЙ МОЖНО КАЖДЫЙ РАЗ ПОДКИДЫВАТЬ РАЗНЫЕ КОЛБЕКИ
 //получаем преобразованный массив - в параметры передаем исходный массив а 2 параметром -
 // функцию в которой будет инкапсулирована логика преобразования каждого элемента исходного массива
-const getMappedArray = (array,func ) => {
+const getMappedArray = (array, func) => {
     //создадим пустой массив
     const result = [];
     // бежим циклом
@@ -80,25 +80,24 @@ const getMappedArray = (array,func ) => {
     return result
 }
 
-console.log( getMappedArray(students, el => el.name))
-console.log( getMappedArray(students, el => ({...el,isStudent: true})))
+console.log(getMappedArray(students, el => el.name))
+console.log(getMappedArray(students, el => ({...el, isStudent: true})))
 console.log(students.map(el => el.name))
-console.log(students.map(el => ({...el,isStudent: true})))
-
+console.log(students.map(el => ({...el, isStudent: true})))
 
 
 //напишем функцию которая фильтруем элементы
-    // Примерно так под капотом устроен метод фильтр
-    // исходный массив array и функцию func ,передаем в параметры
+// Примерно так под капотом устроен метод фильтр
+// исходный массив array и функцию func ,передаем в параметры
 const getFilteredArray = (array, func) => {
     const result = [];
 
     for (let i = 0; i < array.length; i++) {
         // проверям на соответствие условию элемента - если функция возвращает true то
-       if (func((array[i])) === true) {
-           //пушим в новый массив
-           result.push((array[i]))
-       }
+        if (func((array[i])) === true) {
+            //пушим в новый массив
+            result.push((array[i]))
+        }
     }
     return result;
 }
@@ -109,7 +108,32 @@ console.log(getFilteredArray(students, st => st.scores >= 100))
 
 //Используем метод filter
 //берем студентов и проверяем есть ли такие у кого >= 100 баллов
-console.log(students.filter((s)=> s.scores >= 100))
+console.log(students.filter((s) => s.scores >= 100))
 // console.log(students.filter(s=> s.scores >= 100)) более сокращенно убрали ковычки.
 
 
+
+//КОНТЕКСТ ВЫЗОВА THIS
+//this - контекст вызова; тот кто будет использовать в качестве метода ;
+//тот кто стоит перед точкой
+
+
+//1. создали НЕ СТРЕЛОЧНУЮ А ОБЫЧНУЮ функцию getMappedArrayWithContext ( СТРЕЛОЧНЫЕ ФУНКЦИИ С КОНТЕКСТОМ НЕ ИСПОЛЬЗУЮТСЯ!!!)
+//2. она не получает массив в параметрах
+//3. получаем массив в качестве контекста вызова
+//4. тебя какой то массив будет вызывать как свой собственный метод, и этот массив - ты проверь у него длину
+//5.  и перебери все элементы  того массива который тебя будет вызывать.
+function getMappedArrayWithContext(func) {
+    const result = [];
+    //проверь длину у массива this.length // меняем слово array  на this.
+    for (let i = 0; i < this.length; i++) {
+        result.push(func(this[i]))
+    }
+    return result;
+}
+
+//назовем функцию myMap// и скажем - пускай у наших массивов появится метод myMap
+//и эта функция getMappedArrayWithContext используется у всех массивов под именем myMap
+Array.prototype.myMap = getMappedArrayWithContext
+
+console.log(students.myMap(el => el.name))
