@@ -112,6 +112,8 @@ console.log(students.filter((s) => s.scores >= 100))
 // console.log(students.filter(s=> s.scores >= 100)) более сокращенно убрали ковычки.
 
 
+
+
 //КОНТЕКСТ ВЫЗОВА THIS
 //this - контекст вызова; тот кто будет использовать в качестве метода ;
 //тот кто стоит перед точкой
@@ -138,6 +140,7 @@ Array.prototype.myMap = getMappedArrayWithContext
 console.log(students.myMap(el => el.name))
 
 
+
 //МЕТОД FIND
 // 1. получает array и функцию( которая будет находить совпадение в массиве)
 // 2. если совпало то возвращает найденый элемент в массиве
@@ -154,3 +157,48 @@ const myFind = (array, func) => {
 }
 //найдем в консоли в массиве со студентами Alex
 console.log(myFind(students, el => el.name === 'Alex')) //{name: 'Alex', age: 20, isMarried: true, scores: 100}
+
+
+
+//МЕТОД PUSH
+// 1. Создаем функцию myPush
+// 2. в параметрах массив и какой то элемент
+// 3. возвращает students.length - новую длину объекта
+// 4. ВАЖНО !!!  push() МУТИРУЕТ старый массив  !!!
+// 5. берем students[students.length] то это будет следующий за последним элемент массива.
+// мы просто создадим новую ячейку в массиву и присвоим туда ссылку на элемент   = el
+// 6. а по скольку наш массив мутирует мы должны вернуть длину массива return  students.length
+const myPush = (array, el) => {
+    students[students.length] = el
+    return students.length
+}
+ // 7. вызываем функцию myPush и 1м параметром указываем students ,
+// а 2м - добавляем в массив студентов students  нового студента
+console.log(myPush(students, {name: "Valera", age: 34, isMarried: false, scores: 785}))
+console.log(students)
+
+
+
+
+//МЕТОД INCLUDES
+// метод берет какой то массив и какой то элемент и возвращает
+// и если этот элемент есть в массиве он возвращает true, если нет то возвращает false
+// 1. так же пройдемся циклом по длинне массива и i < array.length
+// 2. на каждой итерации проверяем  по очереди элемент в массиве array[i] === el
+// 3. сравниваем с el который ищем
+// 4. и возвращаем return true если нашли
+// 5. иначе - если пробежались по всему циклу и ничего не нашли return false
+// 6.
+
+const myIncludes = (array, el) => {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === el) {
+            return true
+        }
+    }
+    return false
+}
+//добавим объект например students[3]
+console.log(myIncludes(students, students[3]))//вернет true
+
+console.log(myIncludes(students, 1)) //вернет false потому что мы создали другой объект и ссылки на него в объекте не будет
