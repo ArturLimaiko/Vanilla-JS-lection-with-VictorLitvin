@@ -112,7 +112,6 @@ console.log(students.filter((s) => s.scores >= 100))
 // console.log(students.filter(s=> s.scores >= 100)) более сокращенно убрали ковычки.
 
 
-
 //КОНТЕКСТ ВЫЗОВА THIS
 //this - контекст вызова; тот кто будет использовать в качестве метода ;
 //тот кто стоит перед точкой
@@ -137,3 +136,21 @@ function getMappedArrayWithContext(func) {
 Array.prototype.myMap = getMappedArrayWithContext
 
 console.log(students.myMap(el => el.name))
+
+
+//МЕТОД FIND
+// 1. получает array и функцию( которая будет находить совпадение в массиве)
+// 2. если совпало то возвращает найденый элемент в массиве
+// 3. проходимся по циклу i < array.length
+// 4. и проверяем с помощью функции func - array[i] ,
+// 5. если вернула true то возвращаем найденный элемент и выходим из функции return array[i];
+// 6. одновременно с выходом из функции обрывается выполнение
+const myFind = (array, func) => {
+    for (let i = 0; i < array.length; i++) {
+        if (func(array[i]) === true) {
+            return array[i];
+        }
+    }
+}
+//найдем в консоли в массиве со студентами Alex
+console.log(myFind(students, el => el.name === 'Alex')) //{name: 'Alex', age: 20, isMarried: true, scores: 100}
