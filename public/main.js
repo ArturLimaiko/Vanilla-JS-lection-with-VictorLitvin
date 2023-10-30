@@ -225,4 +225,5 @@ const mySlice = (array, startIndex = 0, endIndex = array.length) => {
     return result
 }
 
-console.log(mySlice([1,2,3,4,5], 1 , 3))
+console.log(mySlice([1,2,3,4,5], 1 , 3)) // (2) [2, 3]
+console.log(mySlice(students, 1 , 3)) //(2)[{…}, {…}]
